@@ -1,0 +1,53 @@
+{
+  "tests": [
+    {
+      "name": "Успешная авторизация администратора",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "email": "admin@nightvolt.app",
+        "password": "NIGHTVOLT-ROOT-2025",
+        "role": "admin"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "user": {
+          "email": "admin@nightvolt.app",
+          "role": "admin"
+        }
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Неверный пароль",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "email": "admin@nightvolt.app",
+        "password": "wrong-password",
+        "role": "admin"
+      },
+      "expectedStatus": 401,
+      "expectedBody": {
+        "success": false
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Неверный email",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "email": "nonexistent@test.com",
+        "password": "test123",
+        "role": "artist"
+      },
+      "expectedStatus": 401,
+      "expectedBody": {
+        "success": false
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
